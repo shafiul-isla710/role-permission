@@ -378,8 +378,8 @@
 							href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<img src="assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
 							<div class="user-info">
-								<p class="user-name mb-0">Mazbaul</p>
-								<p class="designattion mb-0">mazbaul@gmail.com</p>
+								<p class="user-name mb-0">Shafi</p>
+								<p class="designattion mb-0">shafiul7sms@gmail.com</p>
 							</div>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 
@@ -22,5 +23,10 @@ require __DIR__.'/auth.php';
 
 Route::middleware(['auth','verified'])->group(function(){
    Route::get('user-logout',[UserController::class, 'logout'])->name('user.logout');
+
+
+   //roles route
+   Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+   Route::get('/create', [RoleController::class, 'createRolePage'])->name('roles.create');
 });
 
