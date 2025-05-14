@@ -31,42 +31,40 @@
                         <div class="card">
                             <div class="card-body p-4">
                                 <h5 class="mb-4">Create Role</h5>
-                                <form action="" method="post">
+                                <form action="{{ route('roles.store') }}" method="POST">
+                                    @csrf
 
                                     <div class="form-group mb-3">
                                         <label for="name" class="col-sm-3 col-form-label">Role Name</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="name" name="name" value=""
+                                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value=""
                                                 placeholder="Enter Your Role Name">
+                                               
+                                                @error('name')
+                                                    
+                                                    <span class="invalid-feedback text-red-600" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                
+                                                @enderror
                                         </div>
 
                                     </div>
                                     <div class="form-group mb-3">
                                         <div class="col-sm-9 form-check">
+
+                                            @foreach($permissions as $permission)
+
                                             <label class="form-check-label">
-                                                <input type="checkbox" name="permission[]" value=""
+                                                <input type="checkbox" name="permission[{{ $permission->id }}]" value="{{ $permission->id }}"
                                                     class="form-check-input">
-                                                user-list
+                                                {{ $permission->name }}
                                             </label>
                                             <br />
-                                            <label class="form-check-label">
-                                                <input type="checkbox" name="permission[]" value=""
-                                                    class="form-check-input">
-                                                user-create
-                                            </label>
-                                            <br />
-                                            <label class="form-check-label">
-                                                <input type="checkbox" name="permission[]" value=""
-                                                    class="form-check-input">
-                                                user-edit
-                                            </label>
-                                            <br />
-                                            <label class="form-check-label">
-                                                <input type="checkbox" name="permission[]" value=""
-                                                    class="form-check-input">
-                                                user-delete
-                                            </label>
-                                            <br />
+
+                                            @endforeach
+
+                                            
                                         </div>
                                     </div>
                                     <div class="row">
