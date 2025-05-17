@@ -27,7 +27,10 @@ Route::middleware(['auth','verified'])->group(function(){
 
    //roles route
    Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
-   Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
+   Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
    Route::post('/store', [RoleController::class, 'store'])->name('roles.store');
+   Route::get('/roles/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');
+   Route::put('/update/{id}', [RoleController::class, 'update'])->name('roles.update');
+   Route::delete('/roles/delete/{id}', [RoleController::class, 'destroy'])->name('roles.delete');
 });
 

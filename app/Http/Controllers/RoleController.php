@@ -38,16 +38,15 @@ class RoleController extends Controller
 
 
         $request->validate([
-            'name'=>'required|unique:roles,name',
-            'permission'=>'required'
+            'name' => 'required|unique:roles,name',
+            'permission' => 'required'
         ]);
-        $permissionId = array_map('intval',$request->input('permission'));
+        $permissionId = array_map('intval', $request->input('permission'));
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($permissionId);
         flash()->success('Role Created Successfully');
 
         return redirect()->route('roles.index');
-
     }
 
     /**
@@ -63,7 +62,10 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $permissions = Permission::all();
+        $role = Role::with("Permissions")->find($id);
+        $rolePermission = $role->permissions->pluck('id')->all();
+        return view('backend.pages.role.edit', compact('role', 'permissions', 'rolePermission'));
     }
 
     /**
@@ -71,14 +73,30 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request->all());
+        
+        $request->validate([
+            'name' => 'required|unique:roles,name,'.$id,
+            'permission' => 'required'
+        ]);
+        $role = Role::find($id);
+        $role->name = $request->input('name');
+        $role->save();
+
+        $permissionId = array_map('intval', $request->input('permission'));
+        $role->syncPermissions($permissionId);
+        flash()->success('Role Updated Successfully');
+        return redirect()->route('roles.index');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function q(string $id)
     {
-        //
+        Role::find($id)->delete();
+         sweetalert()->success("Role Deleted Successfully");
+        return redirect()->back();
     }
 }

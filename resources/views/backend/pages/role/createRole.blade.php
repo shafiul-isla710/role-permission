@@ -1,6 +1,7 @@
 
 @extends('backend.layout.app')
 
+
 @section('content')
 
   <div class="page-wrapper">
@@ -21,7 +22,7 @@
                     </div>
                     <div class="ms-auto">
                         <div class="btn-group">
-                            <a href="roles-index.html" class="btn btn-primary">All Roles</a>
+                            <a href="{{ route('roles.index') }}" class="btn btn-primary">All Roles</a>
                         </div>
                     </div>
                 </div>
