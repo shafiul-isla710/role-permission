@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -12,7 +15,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::with('roles')->get();
+        
+      
+        return view('backend.pages.user.index',compact('users'));
     }
 
     /**
@@ -20,7 +26,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::latest()->get();
+
+       return view('backend.pages.user.userCreate',compact('roles'));
+        
     }
 
     /**
@@ -28,7 +37,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|unique:users,email',
+            'roles'=>'required',
+            'password'=>'required|same:confirm_password',
+        ]);
+        $user = User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
+        ]);
+
+        $user->assignRole($request->roles);
+        flash()->success('User Created Successfully');
+        return redirect()->route('users.index');
+
     }
 
     /**

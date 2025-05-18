@@ -32,5 +32,11 @@ Route::middleware(['auth','verified'])->group(function(){
    Route::get('/roles/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');
    Route::put('/update/{id}', [RoleController::class, 'update'])->name('roles.update');
    Route::delete('/roles/delete/{id}', [RoleController::class, 'destroy'])->name('roles.delete');
+   //user routes
+   Route::get('/users', [UserController::class, 'index'])->name('users.index');
+   Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+   Route::post('/users', [UserController::class, 'store'])->name('users.store');
+
+
 });
 

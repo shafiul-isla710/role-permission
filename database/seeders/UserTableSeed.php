@@ -36,7 +36,7 @@ class UserTableSeed extends Seeder
        $role->syncPermissions($permission);
 
        //assign role to user
-       $super_admin->assignRoles($role);
+       $super_admin->assignRole($role);
        $admin->syncRoles($role);
 
     }
