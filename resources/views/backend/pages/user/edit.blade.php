@@ -24,13 +24,14 @@
             <div class="card">
                 <div class="card-body p-4">
                     <h5 class="mb-4">Create Products</h5>
-                    <form action="{{ route('users.store') }}" method="POST">
+                    <form action="{{ route('users.update',$user->id) }}" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="row mb-3">
                             <label for="name" class="col-sm-3 col-form-label">Name</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    id="name" name="name" value="" placeholder="Enter Your Name">
+                                    id="name" name="name"  placeholder="Enter Your Name" value="{{ $user->name }}">
                                 @error('name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -41,7 +42,7 @@
                             <label for="email" class="col-sm-3 col-form-label">Email</label>
                             <div class="col-sm-9">
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                    id="email" name="email" value="" placeholder="Enter your email">
+                                    id="email" name="email" value="{{ $user->email }}" placeholder="Enter your email">
 
                                 @error('email')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -79,8 +80,8 @@
                             <div class="col-sm-9">
                                 <select multiple class="form-select" name="roles[]">
                                     <option selected="" disabled>Select Roles</option>
-                                    @foreach ($roles as $role)
-                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->name }}" {{ in_array($role->name,$userRoles)? 'selected' : '' }}>{{ $role->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
