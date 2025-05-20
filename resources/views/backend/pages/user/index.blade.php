@@ -57,11 +57,11 @@
                                             <td>{{ $user->email }}</td>
                                             <td class="d-flex gap-2">
                                                 <a href="{{ route('users.edit',$user->id) }}" class="btn btn-primary btn-small">edit</a>
-                            <form action="{{ route('users.destroyq', $user->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-small">delete</button>
-                            </form>
+                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-small">delete</button>
+                                                </form>
                                 
                                             </td>
                                         </tr>

@@ -22,8 +22,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            PermissionTableSeed::class,
-            UserTableSeed::class
+           ProductSeeder::class
         ]);
     }
 }
