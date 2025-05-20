@@ -17,7 +17,7 @@
 					</div>
 					<div class="ms-auto">
 						<div class="btn-group">
-							<a href="product-create.html" class="btn btn-primary">Create Product</a>
+							<a href="{{ route('product.create') }}" class="btn btn-primary">Create Product</a>
 						</div>
 					</div>
 				</div>
@@ -50,7 +50,11 @@
 											<td>{{ $product->qty }}</td>
 											<td class="d-flex gap-2">
 												<a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary btn-small">edit</a>
-												<button type="submit" class="btn btn-danger btn-small">delete</button>
+								<form action="{{ route('product.delete',$product->id) }}" method="POST">
+									@csrf
+									@method('DELETE')
+									<button type="submit" class="btn btn-danger btn-small">delete</button>
+								</form>
 											</td>
 										</tr>
 
